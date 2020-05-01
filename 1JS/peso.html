@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Cual es tu peso</title>
+    <style media="screen">
+      body
+      {
+      background : linear-gradient(to bottom, #00cc99, #00ffbf);
+      color: #993ancho;
+      }
+
+      h2
+      {
+      color: #990099;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hola amigo</h1>
+    <h2>Con este aplicativo podrás averiguar cual es tu peso en varios planetas</h2>
+    <script type="text/javascript">
+      var gtierra=9.8; //gravedades dadas en m/s^2
+      var gjupiter=24.8;
+      var gmarte=3.7;
+      var gkr = 10004;
+      var ptierra = prompt('¿Cual es tu peso en la tierra?','Peso');
+      ptierra=parseFloat(ptierra);
+      var pmarte = ptierra*gmarte/gtierra;
+      var pjupiter = ptierra*gjupiter/gtierra;
+      var pkr = ptierra*gkr/gtierra;
+      var planeta = parseInt(prompt('¿En que planeta te encuentras? \n Elige entre \n 1. Marte, 2 .Júpiter y 3. Kriptón','Elige entre 1 2 y 3.'));
+      var peso
+      var texto
+
+      if (planeta === 1)
+      {
+        planeta = "Marte";
+        peso = pmarte;
+        peso = peso.toFixed(2);
+        texto = 'Tu peso en '+ planeta + ' es ' + peso +' Kilogramos';
+        texto = texto.fontsize('24');
+
+        document.write(texto);
+      }
+      else if (planeta === 2)
+      {
+        planeta = "Júpiter";
+        peso = pjupiter;
+        peso = peso.toFixed(2);
+        texto = 'Tu peso en '+ planeta + ' es ' + peso +' Kilogramos';
+        texto = texto.fontsize('24');
+
+        document.write(texto);
+      }
+      else if (planeta === 3)
+      {
+        planeta = "Kriptón";
+        peso=ptierra;
+        peso = peso.toFixed(2);
+        texto = 'Tu peso en '+ planeta + ' es ' + peso +' Kilogramos';
+        texto = texto.fontsize('24');
+
+        document.write(texto);
+      }
+      else
+      {
+      document.write("Ha ocurrido un error en la introducción de datos! Inténtalo nuevamente.");
+      }
+          </script>
+  </body>
+</html>
