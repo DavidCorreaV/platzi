@@ -21,40 +21,13 @@ function eDine()//entrega el dinero
   dinero = parseInt(cajon.value); //castea el string a un numero
   var ope = dinero; //guarda el valor introducido en otra variable, pues dinero la modificaremos
 
-  for (var bi of caja)//Algoritmo base explicado en el video
-  {
-    if (dinero > 0)
-    {
-      div = Math.floor(dinero/bi.valor);
-      if (div > bi.cant)
-      {
-        papeles = bi.cant;
-      }
-      else
-      {
-        papeles = div;
-      }
-      entregado.push(new Billete(bi.valor, papeles));
-      for(y of caja) //Esta parte retira el dinero entregado del dinero disponible
-      {
-        if (bi.valor == y.valor)
-        {
-          y.cant=y.cant-papeles;
-        }
-      }
-      dinero = dinero - (bi.valor*papeles);
-    }
-  }
-
-  console.log(entregado);
-
   if (dinero % caja[2].valor != 0) //Valida que el valor sea posible de entregar segun las denominaciones existentes. Desafortunadamente requiere que la denominacion
   {                                //mas pequeña se ubique en caja[2], pero sirve ademas para validar resultados decimales y negativos
     alert("El monto introducido no es válido.");
     hora = new Date();
     console.log("Operación ilegal por " + ope + " en " + hora);//registra en el consolelog
   }
-  else if (dinero > 0) //Valida fondos insuficientes
+  else if (ope > total) //Valida fondos insuficientes
   {
     alert("Este cajero no cuenta con fondos suficientes para realizar el retiro.");
     hora = new Date();
@@ -62,6 +35,31 @@ function eDine()//entrega el dinero
   }
   else //Entrega el dinero y registra el resultado usando innerHTML.
   {
+    for (var bi of caja)//Algoritmo base explicado en el video
+    {
+      if (dinero > 0)
+      {
+        div = Math.floor(dinero/bi.valor);
+        if (div > bi.cant)
+        {
+          papeles = bi.cant;
+        }
+        else
+        {
+          papeles = div;
+        }
+        entregado.push(new Billete(bi.valor, papeles));
+        for(y of caja) //Esta parte retira el dinero entregado del dinero disponible
+        {
+          if (bi.valor == y.valor)
+          {
+            y.cant=y.cant-papeles;
+          }
+        }
+        dinero = dinero - (bi.valor*papeles);
+      }
+    }
+    console.log(entregado);
     res.innerHTML = "Usted ha retirado: <br/>";// pone un titulo estático (y funciona como una especie de clear)
     for (var x of entregado)
       {
@@ -74,7 +72,6 @@ function eDine()//entrega el dinero
             x.mostrar();
           }
         }
-
       }
       bill.innerHTML += " <br/> Gracias por usar ATM4u<3. ¡Vuelva pronto! <br/> <br/>"; //Separador entre transacciones
     hora = new Date();
@@ -84,8 +81,6 @@ function eDine()//entrega el dinero
 
     console.log("El total en caja es de " + total );//log de cuanto queda en caja
   }
-
-
   //Limpieza de variables para la siguiente transaccion
   dinero = 0;
   entregado = [];
