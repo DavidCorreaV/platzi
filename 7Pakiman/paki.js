@@ -2,7 +2,7 @@ class Pakiman
 {
   constructor(n, v, a)
   {
-    this.imagen = new Image()
+    this.imagen = new Image();
     this.nombre = n;
     this.PV = v;
     this.PA = a;
